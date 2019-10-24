@@ -14,11 +14,19 @@ function toHTML(owca) {
 
 const tabela = document.querySelector("#owce");
 const imię = document.querySelector("#sheep-name");
-
+const szczęście = document.querySelector("#sheep-happy")
+const pływalność = document.querySelector("#sheep-sweam")
+const nogi = document.querySelector("#number-of-legs");
 function check( owca ){
 	const wpisaneImię = imię.value.trim()
-	if(wpisaneImię == "") return true;
-	return owca.name.startsWith( wpisaneImię );
+	const wpisaneNogi = nogi.value.trim()
+	const wpisaneSzczęście = szczęście.checked
+	const wpisanaPływalność = pływalność.checked
+	if(wpisaneSzczęście && !(owca.isHappy))	return false;
+	if(wpisanaPływalność && !(owca.canSweam)) return false;
+	if(wpisaneImię && !owca.name.startsWith( wpisaneImię )) return false;
+	if(wpisaneNogi && !owca.numberOfLegs == wpisaneNogi) return false;
+	return owca.numberOfLegs( wpisaneNogi );
 }
 
 function refresh(){
